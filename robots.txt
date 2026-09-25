@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /tools/
+Sitemap: https://giogas-pm.github.io/bodas/sitemap.xml

@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculadora de Bodas: descubra suas bodas + quadro</title>
+<meta name="description" content="Digite a data do casamento e descubra quantos anos vocês fazem, qual é a boda, o significado e quantos dias faltam pras próximas. Crie o quadro de bodas pra imprimir.">
+<link rel="canonical" href="https://giogas-pm.github.io/bodas/">
+<meta property="og:title" content="Que bodas vocês fazem? Calculadora de bodas de casamento">
+<meta property="og:description" content="Descubra a boda, o significado e a contagem de dias. Grátis. E crie um quadro lindo pra imprimir.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://giogas-pm.github.io/bodas/">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://giogas-pm.github.io/bodas/og.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbf7ef">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💍%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Jost:wght@200;300;400;500&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="quadro.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Calculadora de Bodas","url":"https://giogas-pm.github.io/bodas/","applicationCategory":"LifestyleApplication","operatingSystem":"Any","inLanguage":"pt-BR","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Como saber quais bodas eu faço?","acceptedAnswer":{"@type":"Answer","text":"Conte os anos completos desde a data do casamento. Cada aniversário tem um nome: 1 ano é Bodas de Papel, 10 anos Estanho, 15 Cristal, 20 Porcelana, 25 Prata, 30 Pérola, 40 Esmeralda, 50 Ouro e 60 Diamante. A calculadora faz a conta e mostra quantos dias faltam pras próximas."}},{"@type":"Question","name":"Quem casou em 29 de fevereiro comemora quando?","acceptedAnswer":{"@type":"Answer","text":"Nos anos que não são bissextos, a calculadora considera o dia 28 de fevereiro como a data das bodas. Nos anos bissextos, vale o próprio dia 29."}},{"@type":"Question","name":"O Quadro de Bodas é enviado pelo correio?","acceptedAnswer":{"@type":"Answer","text":"Não. É um arquivo digital pra imprimir em casa ou numa gráfica, em A4 ou A3. Fica pronto na hora, depois do pagamento."}}]}]}</script>
+<style>
+  :root{--pri:#8c3b4a;--pri2:#6e2a38;--gold:#b8964a;--ink:#2d2620;--bg:#fbf7ef;--card:#fff;--muted:#7a6c60;--line:#ebe1d2;--ok:#2f6b4f}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;font-family:Nunito,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:16px}
+  a{color:var(--pri)}
+  header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;padding:14px 16px;max-width:1100px;margin:0 auto}
+  .logo{font:600 24px 'Cormorant Garamond',serif;color:var(--pri);text-decoration:none}
+  .trust{font-size:13px;color:var(--ok);font-weight:700}
+  .hero{max-width:760px;margin:0 auto;padding:6px 16px 0;text-align:center}
+  .hero h1{font:600 clamp(32px,7vw,52px)/1.05 'Cormorant Garamond',serif;margin:6px 0 10px}
+  .hero h1 em{color:var(--pri)}
+  .hero p{color:var(--muted);margin:0 auto;max-width:600px}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px}
+  .calc{max-width:640px;margin:18px auto 0;padding:0 16px}
+  label{display:block;font-weight:700;font-size:13.5px;margin:12px 0 5px}
+  label small{font-weight:400;color:var(--muted)}
+  input,select,textarea{width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid #dccfbd;border-radius:12px;background:#fffdf9;color:var(--ink)}
+  textarea{min-height:60px;resize:vertical}
+  .d3{display:grid;grid-template-columns:.8fr 1.5fr 1fr;gap:8px}
+  .n2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .btn{display:inline-block;border:0;border-radius:14px;padding:14px 18px;font:800 16px Nunito,sans-serif;cursor:pointer;text-decoration:none;text-align:center;line-height:1.25}
+  .btn-pri{background:linear-gradient(180deg,#a04657,var(--pri2));color:#fff;box-shadow:0 8px 18px rgba(140,59,74,.25)}
+  .btn-ghost{background:#fff;border:1px solid #dccfbd;color:var(--ink)}
+  .w100{width:100%}
+  .err{color:#b3261e;font-size:14px;font-weight:700;margin-top:8px;display:none}
+  /* resultado */
+  #res{display:none;margin-top:14px}
+  .rbig{text-align:center;padding:6px 0 4px}
+  .rbig .ic{width:96px;height:96px;margin:0 auto}
+  .rbig .ic svg{width:96px;height:96px}
+  .rbig .k{font:700 13px Nunito,sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+  .rbig h2{font:600 clamp(30px,7vw,42px)/1.08 'Cormorant Garamond',serif;margin:4px 0}
+  .rbig h2 span{color:var(--pri)}
+  .rbig .sig{font:italic 500 19px/1.45 'Cormorant Garamond',serif;color:#4a3e34;max-width:500px;margin:6px auto 0}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0 4px}
+  .kpis div{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 6px;text-align:center;font-size:12.5px;color:var(--muted)}
+  .kpis b{display:block;font:600 24px 'Cormorant Garamond',serif;color:var(--ink)}
+  .next{background:#fff7ea;border:1px solid #efd9ad;border-radius:14px;padding:12px 14px;margin:12px 0;font-size:15px}
+  .next b{color:var(--pri2)}
+  ul.lst{list-style:none;padding:0;margin:8px 0;font-size:14.5px}
+  ul.lst li{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px dashed var(--line)}
+  ul.lst li span:last-child{color:var(--muted);text-align:right}
+  .acts{display:grid;gap:8px;margin-top:14px}
+  /* quadro */
+  .sec-h{max-width:1100px;margin:44px auto 0;padding:0 16px;text-align:center}
+  .sec-h h2{font:600 clamp(28px,6vw,40px)/1.1 'Cormorant Garamond',serif;margin:0 0 6px}
+  .sec-h p{color:var(--muted);margin:0 auto;max-width:620px}
+  .app{max-width:1100px;margin:16px auto;padding:0 16px;display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:22px;align-items:start}
+  @media(max-width:860px){.app{grid-template-columns:1fr}.app .pv{order:-1}}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{border:1px solid #dccfbd;background:#fffdf9;border-radius:999px;padding:8px 12px;font-size:14px;cursor:pointer;user-select:none}
+  .chip.on{background:var(--pri);border-color:var(--pri);color:#fff}
+  .stage{background:#ede3d3;border-radius:18px;padding:14px;overflow:hidden;cursor:zoom-in;position:relative}
+  .fit{transform-origin:top left}
+  .zoomhint{position:absolute;right:22px;bottom:22px;background:rgba(45,38,32,.75);color:#fff;font-size:12.5px;border-radius:999px;padding:5px 10px;pointer-events:none}
+  .price{font-size:13px;color:var(--muted);text-align:center;margin:8px 0 0}
+  .buy{margin-top:16px}
+  .paid{display:none}.unlocked .paid{display:block}.unlocked .unpaid{display:none}
+  .hint{background:#eef6f0;border:1px solid #cfe5d6;color:#24543e;border-radius:12px;padding:9px 12px;font-size:14px;margin-bottom:10px;display:none}
+  .fotoRow{display:flex;gap:8px;align-items:center}
+  .fotoRow .btn{padding:10px 12px;font-size:14px}
+  /* conteúdo */
+  .content{max-width:780px;margin:40px auto;padding:0 16px;line-height:1.65}
+  .content h2{font:600 30px/1.15 'Cormorant Garamond',serif;margin:30px 0 8px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin:10px 0}
+  .pop{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:12px 0}
+  .pop a{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-decoration:none;color:var(--ink);font-size:14px}
+  .pop a b{display:block;font:600 19px 'Cormorant Garamond',serif;color:var(--pri)}
+  footer{text-align:center;color:var(--muted);font-size:13px;padding:30px 16px 90px}
+  footer nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;margin-bottom:12px}
+  footer nav a{color:var(--muted)}
+  .toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:#2d2620;color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;opacity:0;transition:.25s;pointer-events:none;z-index:30;max-width:90vw;text-align:center}
+  .toast.show{opacity:1}
+  .bar{position:fixed;left:0;right:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(251,247,239,.97);border-top:1px solid var(--line);z-index:8;display:none}
+  @media(max-width:860px){.bar.show{display:block}}
+  .zoom{position:fixed;inset:0;background:rgba(30,22,16,.8);z-index:20;display:none;overflow:auto;padding:14px 10px 30px}
+  .zoom.open{display:block}
+  .zoom .x{position:sticky;top:0;float:right;border:0;background:#fff;border-radius:999px;width:40px;height:40px;font-size:24px;cursor:pointer;z-index:2}
+  .zoom .zin{clear:both;margin:0 auto}
+  .zoom .zbuy{max-width:480px;margin:14px auto 0}
+  #printArea{display:none}
+  @media print{
+    @page{size:A4;margin:0}
+    body{background:#fff}
+    body>*:not(#printArea){display:none!important}
+    #printArea{display:block!important}
+    #printArea .qd{box-shadow:none;margin:0;page-break-after:avoid}
+    #printArea.a3 .qd{zoom:1.41421}
+  }
+  #pvw{user-select:none;-webkit-user-select:none}
+</style>
+</head>
+<body>
+<header><a class="logo" href="/bodas/">💍 Bodas</a><span class="trust">✓ seus dados não saem do seu aparelho</span></header>
+<div id="inapp" style="display:none;background:#fff3d6;padding:10px 16px;font-size:14px;text-align:center">📌 Pra imprimir o quadro, abra no <b>Chrome ou Safari</b>: toque em <b>⋯</b> → "Abrir no navegador". <a href="#" onclick="copiarLink();return false">Copiar link</a></div>
+<div id="outroNav" style="display:none;background:#e6f4ea;padding:10px 16px;font-size:14px;text-align:center">✅ Pagamento confirmado! Você voltou em outro navegador: preencha os nomes e a data de novo (leva 20s). O quadro está liberado.</div>
+
+<section class="hero">
+  <h1>Calculadora de Bodas: <em>que bodas vocês fazem?</em></h1>
+  <p>Digite a data do casamento e veja quantos anos vocês completam, o nome e o significado da boda, quantos dias já passaram juntos e quanto falta pras próximas.</p>
+</section>
+
+<section class="calc">
+  <div class="panel">
+    <label>Data do casamento</label>
+    <div class="d3">
+      <select id="c_d" aria-label="Dia"></select>
+      <select id="c_m" aria-label="Mês"></select>
+      <input id="c_y" type="number" inputmode="numeric" min="1920" max="2100" placeholder="Ano" aria-label="Ano">
+    </div>
+    <label>Nomes do casal <small>(opcional — aparecem no card e no quadro)</small></label>
+    <div class="n2"><input id="c_n1" maxlength="22" placeholder="Ex: Helena" autocomplete="off"><input id="c_n2" maxlength="22" placeholder="Ex: Roberto" autocomplete="off"></div>
+    <button class="btn btn-pri w100" style="margin-top:14px" onclick="calcular(true)">💍 Descobrir nossas bodas</button>
+    <div class="err" id="err"></div>
+    <div id="res"></div>
+  </div>
+</section>
+
+<section class="sec-h" id="quadro">
+  <h2>Quadro de Bodas pra imprimir</h2>
+  <p>Com os nomes, a data, o símbolo da boda e os dias juntos. 4 estilos, A4 ou A3. Presente pronto em 1 minuto — dá pra imprimir hoje.</p>
+</section>
+<main class="app" id="appRoot">
+  <section class="panel">
+    <div class="hint" id="hintSeo"></div>
+    <div class="n2"><div><label>Nome 1</label><input id="q_n1" maxlength="22" placeholder="Helena" autocomplete="off"></div><div><label>Nome 2</label><input id="q_n2" maxlength="22" placeholder="Roberto" autocomplete="off"></div></div>
+    <label>Data do casamento</label>
+    <div class="d3"><select id="q_d" aria-label="Dia"></select><select id="q_m" aria-label="Mês"></select><input id="q_y" type="number" inputmode="numeric" min="1920" max="2100" placeholder="Ano" aria-label="Ano"></div>
+    <label>Qual boda vai no quadro</label>
+    <select id="q_ano"></select>
+    <label>Estilo</label>
+    <div class="chips" id="q_est"></div>
+    <label>Frase <small>(opcional — no lugar do significado)</small></label>
+    <textarea id="q_frase" maxlength="120" placeholder="Ex: Obrigado por 20 anos de amor, pai e mãe. Vocês são o nosso exemplo."></textarea>
+    <label>Foto do casal <small>(opcional — fica só no seu aparelho)</small></label>
+    <div class="fotoRow"><label class="btn btn-ghost" style="margin:0;font-weight:800">📷 Escolher foto<input type="file" id="q_foto" accept="image/*" style="display:none"></label><button class="btn btn-ghost" id="q_fotoX" style="display:none" onclick="tirarFoto()">Remover</button></div>
+    <label>Tamanho</label>
+    <div class="chips" id="q_tam"><span class="chip on" data-v="A4">A4 (21×30 cm)</span><span class="chip" data-v="A3">A3 (30×42 cm)</span></div>
+    <div class="buy">
+      <div class="unpaid">
+        <button class="btn btn-pri w100" onclick="comprar()">🖼️ Liberar o quadro — R$24,90</button>
+        <p class="price">PDF em alta, sem a marca "PRÉVIA", nos 4 estilos, A4 e A3 · Pix ou cartão via Mercado Pago · pagamento único · no extrato aparece BODAS<br>Produto digital: você imprime em casa ou na gráfica. Nada vai pelo correio.</p>
+      </div>
+      <div class="paid">
+        <button class="btn btn-pri w100" onclick="imprimir()">🖨️ Imprimir / salvar PDF</button>
+        <button class="btn btn-ghost w100" style="margin-top:8px" onclick="salvarLink()">🔗 Guardar o link do quadro</button>
+        <p class="price">Salve como PDF e imprima em papel fotográfico ou couché 180 g+ numa gráfica rápida. Troque estilo, tamanho e frase à vontade: o quadro é deste casal.</p>
+      </div>
+    </div>
+  </section>
+  <section class="pv">
+    <div class="stage" id="stage" onclick="abrirZoom()"><div class="fit" id="fit"><div id="pvw"></div></div><span class="zoomhint">🔍 toque pra ampliar</span></div>
+    <p class="price unpaid">Prévia grátis ao vivo · a versão liberada sai sem a marca "PRÉVIA"</p>
+  </section>
+</main>
+
+<section class="content">
+  <h2>Como a calculadora de bodas funciona</h2>
+  <p>A conta é simples, mas tem pegadinhas. A calculadora conta os <b>anos completos</b> desde a data do casamento: se vocês casaram em 14 de fevereiro de 2006, só completam 20 anos (Bodas de Porcelana) no dia 14 de fevereiro de 2026 — antes disso, ainda estão nos 19 anos, as Bodas de Cretone. Ela também mostra os dias exatos juntos, contando os anos bissextos, e a data (com o dia da semana) das próximas bodas, pra dar tempo de planejar a festa ou o presente.</p>
+  <p>Quem casou em <b>29 de fevereiro</b> tem as bodas no dia 28 de fevereiro nos anos que não são bissextos. E se o casamento ainda vai acontecer, a calculadora mostra a contagem regressiva e a data das primeiras bodas, as de Papel.</p>
+  <h2>As bodas mais comemoradas</h2>
+  <div class="pop" id="pop"></div>
+  <p>Veja a lista completa, do 1º ao 100º ano, na <a href="/bodas/tabela-de-bodas-de-casamento/">tabela de bodas de casamento</a>.</p>
+  <h2>Por que dar um Quadro de Bodas</h2>
+  <div class="card"><b>Pros pais ou avós</b> — é o presente que os filhos e netos mais procuram: bonito na parede, com os nomes e a data certinha, e sai pronto em 1 minuto, mesmo se você lembrou da data em cima da hora.</div>
+  <div class="card"><b>Pra quem você ama</b> — coloque a foto de vocês e uma frase sua. Fica lindo num porta-retratos A4 ou num quadro A3 com moldura.</div>
+  <div class="card"><b>Pra festa</b> — imprima em A3 e use como painel de entrada, na mesa do bolo ou no telão.</div>
+  <h2>Perguntas frequentes</h2>
+  <div class="card"><b>Posso ver antes de pagar?</b><br>Sim. A prévia completa aparece enquanto você preenche. Você só paga pra liberar o PDF sem a marca "PRÉVIA".</div>
+  <div class="card"><b>O que eu recebo?</b><br>O quadro liberado pra imprimir ou salvar em PDF (vetorial, nítido em qualquer tamanho), em A4 e A3, nos 4 estilos, pro casal que você preencheu. Dá pra trocar estilo, frase e foto e imprimir de novo quando quiser.</div>
+  <div class="card"><b>Posso fazer quadros de dois casais com um pagamento?</b><br>Não: cada pagamento libera o quadro de um casal. Pra outro casal, é só criar um quadro novo.</div>
+  <div class="card"><b>Meus dados ficam salvos?</b><br>Os nomes, a data e a foto ficam só no seu navegador. O pagamento registra apenas um código aleatório do pedido.</div>
+  <div class="card"><b>Não gostei. E agora?</b><br>Devolvemos o valor em até 7 dias, sem perguntas.</div>
+</section>
+<footer><nav aria-label="Bodas de casamento" id="fnav"></nav>Bodas · feito com carinho no Brasil · <a href="#" onclick="novoQuadro();return false">criar outro quadro</a></footer>
+
+<div id="printArea"></div>
+<div class="bar" id="bar"><button class="btn btn-pri w100" id="barBtn" onclick="barAcao()">🖼️ Ver o quadro</button></div>
+<div class="zoom" id="zoom" onclick="if(event.target===this)fecharZoom()"><button class="x" onclick="fecharZoom()" aria-label="Fechar">×</button><div class="zin" id="zin"><div id="zfit" style="transform-origin:top left"></div></div>
+  <div class="zbuy"><div class="unpaid" id="zUnpaid"><button class="btn btn-pri w100" onclick="comprar()">🖼️ Liberar o quadro — R$24,90</button><p class="price" style="color:#e8dccb">Sai sem a marca "PRÉVIA", em PDF A4 e A3. Pix ou cartão.</p></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="data.js"></script>
+<script src="quadro.js"></script>
+<script>
+const SB_URL="https://diemqzngskmcuytkzjhr.supabase.co";
+const SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRpZW1xem5nc2ttY3V5dGt6amhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4NDM0MDEsImV4cCI6MjA5ODQxOTQwMX0.w5-w8bU6qFQqIFBDOiNsUvOWbXqeOZSH6tveyLdADx0";
+const SB_H={apikey:SB_KEY,Authorization:'Bearer '+SB_KEY,'Content-Type':'application/json'};
+const $=id=>document.getElementById(id);
+let SLUG=null,D=null,UNLOCKED=false;
+function track(e,m){try{fetch(SB_URL+'/rest/v1/bodas_eventos',{method:'POST',headers:SB_H,body:JSON.stringify({evento:e,slug:SLUG||null,meta:m||null})}).catch(()=>{})}catch(_){}}
+const tracked={};function track1(e,m){if(tracked[e])return;tracked[e]=1;track(e,m)}
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),3400)}
+function uid(){const a='abcdefghijkmnpqrstuvwxyz23456789';let o='';const b=new Uint8Array(10);try{crypto.getRandomValues(b)}catch(_){for(let i=0;i<10;i++)b[i]=Math.random()*256}for(let j=0;j<10;j++)o+=a[b[j]%a.length];return o}
+const esc=BD.esc;
+function blank(){return {n1:'',n2:'',y:'',m:'',d:'',ano:0,anoManual:false,estilo:'classico',tam:'A4',frase:'',foto:''}}
+function cap(s){s=String(s||'').trim();return s?s[0].toUpperCase()+s.slice(1):s}
+function temData(){return BD.valida(+D.y,+D.m,+D.d)}
+function temNomes(){return D.n1.trim().length>=2&&D.n2.trim().length>=2}
+function save(){try{localStorage.setItem('bodas_'+SLUG,JSON.stringify(D));localStorage.setItem('bodas_last',SLUG)}catch(_){try{const c=Object.assign({},D,{foto:''});localStorage.setItem('bodas_'+SLUG,JSON.stringify(c))}catch(__){}}}
+function load(){
+  const h=location.hash,m=h.match(/p=([a-z0-9]{6,20})/),dd=h.match(/[&#]d=([^&]+)/);
+  SLUG=m?m[1]:null;if(!SLUG){try{SLUG=localStorage.getItem('bodas_last')}catch(_){}}if(!SLUG)SLUG=uid();
+  D=null;if(dd){try{D=Object.assign(blank(),JSON.parse(decodeURIComponent(escape(atob(dd[1].replace(/-/g,'+').replace(/_/g,'/'))))))}catch(_){}}
+  if(!D){try{D=JSON.parse(localStorage.getItem('bodas_'+SLUG)||'null')}catch(_){}}
+  D=Object.assign(blank(),D||{});
+  try{UNLOCKED=localStorage.getItem('bodas_ok_'+SLUG)==='1'}catch(_){}
+  history.replaceState(null,'',location.pathname+location.search+'#p='+SLUG);
+}
+/* ---------- selects de data ---------- */
+function fillDate(p){const d=$(p+'_d'),m=$(p+'_m');d.innerHTML='<option value="">Dia</option>'+Array.from({length:31},(_,i)=>`<option>${i+1}</option>`).join('');m.innerHTML='<option value="">Mês</option>'+BD.MESES.map((x,i)=>`<option value="${i+1}">${x}</option>`).join('')}
+function syncDate(){['c','q'].forEach(p=>{$(p+'_d').value=D.d||'';$(p+'_m').value=D.m||'';if(document.activeElement!==$(p+'_y'))$(p+'_y').value=D.y||''})}
+function syncNames(){['c','q'].forEach(p=>{['n1','n2'].forEach(k=>{const el=$(p+'_'+k);if(document.activeElement!==el)el.value=D[k]||''})})}
+/* ---------- calculadora ---------- */
+function plural(n,s,p){return n===1?s:p}
+function diaSem(dt){return BD.DIAS[dt.getDay()]}
+function calcular(clicou){
+  const err=$('err'),res=$('res');
+  if(!D.y||!D.m||!D.d){if(clicou){err.textContent='Escolha o dia, o mês e o ano do casamento.';err.style.display='block'}res.style.display='none';return}
+  if(String(D.y).length<4){if(clicou){err.textContent='Digite o ano com 4 dígitos (ex: 1998).';err.style.display='block'}res.style.display='none';return}
+  if(!temData()){err.textContent='Essa data não existe no calendário ('+D.d+' de '+BD.MESES[D.m-1]+' de '+D.y+'). Confira o dia.';err.style.display='block';res.style.display='none';return}
+  err.style.display='none';
+  const r=BD.calc(+D.y,+D.m,+D.d),casal=(D.n1.trim()&&D.n2.trim())?esc(cap(D.n1))+' e '+esc(cap(D.n2)):'Vocês';
+  let h='';
+  if(r.futuro){
+    const b=r.prox.boda;
+    h=`<div class="rbig"><div class="ic">${BD.icon('couro','#8c3b4a')}</div><div class="k">contagem regressiva</div><h2>${r.faltamCasar===1?'Falta <span>1 dia</span>':'Faltam <span>'+BD.num(r.faltamCasar)+' dias</span>'} pro casamento!</h2><p class="sig">E as primeiras bodas, as de <b>Papel</b>, chegam em ${BD.fmtData(r.prox.data)}. ${esc(b.sig)}</p></div>`;
+  }else if(r.anos===0){
+    const b=r.prox.boda;
+    h=`<div class="rbig"><div class="ic">${BD.icon(b.icon,b.cor)}</div><div class="k">recém-casados</div><h2>${r.juntos===0?'Casaram <span>hoje</span>! Parabéns!':BD.num(r.juntos)+' '+plural(r.juntos,'dia','dias')+' <span>de casados</span>'}</h2><p class="sig">As primeiras bodas são as de <b>Papel</b>, em ${BD.fmtData(r.prox.data)} (${diaSem(r.prox.data)}). Faltam ${BD.num(r.prox.faltam)} dias.</p></div>`;
+  }else if(!r.atual){
+    h=`<div class="rbig"><div class="k">uau</div><h2>${r.anos} anos de casados!</h2><p class="sig">Passou das Bodas de Jequitibá (100 anos), a última da lista tradicional. Um século de amor merece uma festa enorme.</p></div>`;
+  }else{
+    const b=r.atual.boda;
+    h=`<div class="rbig"><div class="ic">${BD.icon(b.icon,b.cor)}</div><div class="k">${r.ehHoje?'é hoje! parabéns 🎉':casal+' completaram'}</div><h2>${r.ehHoje?'Hoje '+(casal==='Vocês'?'vocês completam':casal+' completam')+' ':''}${b.ano} ${plural(b.ano,'ano','anos')}: <span>Bodas de ${esc(b.nome)}</span></h2><p class="sig">${esc(b.sig)}${b.slug?` <a href="/bodas/${b.slug}/">Significado, presentes e frases</a>`:''}</p></div>`;
+  }
+  if(r.anos>=1||r.juntos>0)h+=`<div class="kpis"><div><b>${BD.num(r.juntos)}</b>dias juntos</div><div><b>${BD.num(r.meses||0)}</b>meses</div><div><b>${BD.num(r.juntos*24)}</b>horas</div></div>`;
+  if(r.prox&&!r.futuro&&r.anos>=1){const p=r.prox;h+=`<div class="next">Próximas: <b>Bodas de ${esc(p.boda.nome)}</b> (${p.boda.ano} anos) em <b>${BD.num(p.faltam)} ${plural(p.faltam,'dia','dias')}</b> — ${diaSem(p.data)}, ${BD.fmtData(p.data)}.</div>`}
+  const lst=(r.seguintes||[]).concat((r.marcos||[]).filter(x=>!(r.seguintes||[]).some(s=>s.boda.ano===x.boda.ano)));
+  if(lst.length)h+=`<ul class="lst">${lst.slice(0,6).map(x=>`<li><span>${x.boda.ano} anos — ${x.boda.slug?`<a href="/bodas/${x.boda.slug}/">Bodas de ${esc(x.boda.nome)}</a>`:'Bodas de '+esc(x.boda.nome)}</span><span>${BD.fmtCurta(x.data)}</span></li>`).join('')}</ul>`;
+  const qb=BD.B(D.anoManual&&D.ano?D.ano:BD.bodaSugerida(r));
+  h+=`<div class="acts"><button class="btn btn-pri" onclick="irQuadro()">🖼️ Criar o Quadro de Bodas de ${esc(qb.nome)}</button><button class="btn btn-ghost" onclick="compartilharCard()">📲 Compartilhar card grátis no WhatsApp</button></div>`;
+  res.innerHTML=h;res.style.display='block';
+  track1('calc_ok',{a:r.anos});
+  if(clicou)res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function irQuadro(){$('quadro').scrollIntoView({behavior:'smooth'});track1('quadro_cta')}
+/* ---------- quadro ---------- */
+function fillAnos(){$('q_ano').innerHTML=BODAS.map(b=>`<option value="${b[0]}">${b[0]} ${b[0]===1?'ano':'anos'} — Bodas de ${b[1]}</option>`).join('')}
+function anoQuadro(){if(D.anoManual&&D.ano)return D.ano;if(!temData())return D.ano||20;return BD.bodaSugerida(BD.calc(+D.y,+D.m,+D.d))}
+function exemplo(){return !temNomes()||!temData()}
+function viewObj(){const ex=exemplo();return {n1:D.n1.trim()?cap(D.n1):'Helena',n2:D.n2.trim()?cap(D.n2):'Roberto',y:temData()?+D.y:2006,m:temData()?+D.m:2,d:temData()?+D.d:14,ano:anoQuadro(),estilo:D.estilo,frase:D.frase,foto:D.foto,unlocked:false}}
+let SCALE=1;
+function render(){
+  $('pvw').innerHTML=BD.quadroHTML(viewObj());
+  $('q_ano').value=anoQuadro();
+  document.querySelectorAll('#q_est .chip').forEach(c=>c.classList.toggle('on',c.dataset.v===D.estilo));
+  document.querySelectorAll('#q_tam .chip').forEach(c=>c.classList.toggle('on',c.dataset.v===D.tam));
+  $('q_fotoX').style.display=D.foto?'inline-block':'none';
+  $('appRoot').classList.toggle('unlocked',UNLOCKED);$('zUnpaid').style.display=UNLOCKED?'none':'block';
+  $('outroNav').style.display=(UNLOCKED&&exemplo())?'block':'none';
+  $('barBtn').textContent=UNLOCKED?'🖨️ Imprimir o quadro':'🖼️ Ver o quadro'+(temNomes()?' de '+cap(D.n1)+' & '+cap(D.n2):'');
+  fit();
+  if(!exemplo())track1('quadro_preview',{a:anoQuadro(),e:D.estilo});
+}
+function fit(){const st=$('stage'),f=$('fit');const w=st.clientWidth-28;SCALE=Math.min(1,w/794);f.style.transform='scale('+SCALE+')';f.style.width='794px';st.style.height=(1123*SCALE+28)+'px'}
+window.addEventListener('resize',()=>{fit();if($('zoom').classList.contains('open'))abrirZoom()});
+function abrirZoom(){const z=$('zoom'),zf=$('zfit');zf.innerHTML=BD.quadroHTML(viewObj());const w=Math.min(window.innerWidth-20,794),s=w/794;zf.style.transform='scale('+s+')';zf.style.width='794px';$('zin').style.width=w+'px';$('zin').style.height=(1123*s)+'px';z.classList.add('open');track1('zoom')}
+function fecharZoom(){$('zoom').classList.remove('open')}
+function barAcao(){if(UNLOCKED){imprimir();return}if(!$('zoom').classList.contains('open'))abrirZoom()}
+/* ---------- eventos do formulário ---------- */
+function onDate(p){D.d=$(p+'_d').value;D.m=$(p+'_m').value;D.y=$(p+'_y').value.replace(/\D/g,'').slice(0,4);if(!travaOk())return;syncDate();changed();calcular(false)}
+function onName(p,k){D[k]=$(p+'_'+k).value;if(!travaOk())return;syncNames();changed();if($('res').style.display==='block')calcular(false)}
+function changed(){save();render()}
+/* trava: depois de imprimir, este pedido fica preso a este casal (pequenas correções de grafia continuam liberadas) */
+function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z]/g,'')}
+function chaveCasal(o){o=o||D;return [norm(o.n1).slice(0,3),norm(o.n2).slice(0,3)].sort().join('+')+'|'+String(o.y)}
+function travaLocal(){try{return localStorage.getItem('bodas_tv_'+SLUG)}catch(_){return null}}
+function travaDiferente(){const tv=travaLocal();if(!UNLOCKED||!tv||!temNomes()||String(D.y).length<4)return false;if(norm(D.n1).length<3&&norm(D.n2).length<3)return false;return chaveCasal()!==tv}
+let avisou=0;
+function travaOk(){if(travaDiferente()&&Date.now()-avisou>6000){avisou=Date.now();toast('Atenção: este quadro já foi impresso pra outro casal. Pra um casal diferente, use "criar outro quadro" no rodapé 💛')}return true}
+async function sha(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}catch(_){return s}}
+function bind(){
+  fillDate('c');fillDate('q');fillAnos();
+  ['c','q'].forEach(p=>{['_d','_m'].forEach(s=>$(p+s).addEventListener('change',()=>onDate(p)));$(p+'_y').addEventListener('input',()=>onDate(p));['n1','n2'].forEach(k=>$(p+'_'+k).addEventListener('input',()=>onName(p,k)))});
+  $('q_ano').addEventListener('change',()=>{D.ano=+$('q_ano').value;D.anoManual=true;changed()});
+  $('q_frase').value=D.frase;$('q_frase').addEventListener('input',()=>{D.frase=$('q_frase').value;changed()});
+  $('q_est').innerHTML=Object.entries(BD.ESTILOS).map(([k,v])=>`<span class="chip" data-v="${k}">${v}</span>`).join('');
+  $('q_est').onclick=e=>{const c=e.target.closest('.chip');if(!c)return;D.estilo=c.dataset.v;changed();track('estilo',{e:D.estilo})};
+  $('q_tam').onclick=e=>{const c=e.target.closest('.chip');if(!c)return;D.tam=c.dataset.v;changed()};
+  $('q_foto').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(f)lerFoto(f);e.target.value=''});
+  syncDate();syncNames();
+  $('pop').innerHTML=[1,5,10,15,20,25,30,35,40,45,50,60].map(a=>{const b=BD.B(a);return `<a href="/bodas/${b.slug}/"><b>Bodas de ${b.nome}</b>${a} ${a===1?'ano':'anos'} de casados</a>`}).join('');
+  $('fnav').innerHTML='<a href="/bodas/tabela-de-bodas-de-casamento/">Tabela de bodas de casamento</a>'+BODAS.filter(b=>b[5]).map(b=>`<a href="/bodas/${b[5]}/">Bodas de ${b[1]} (${b[0]} ${b[0]===1?'ano':'anos'})</a>`).join('');
+}
+function lerFoto(f){
+  const img=new Image(),url=URL.createObjectURL(f);
+  img.onload=()=>{const M=900,s=Math.min(1,M/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.round(img.width*s);c.height=Math.round(img.height*s);c.getContext('2d').drawImage(img,0,0,c.width,c.height);D.foto=c.toDataURL('image/jpeg',.86);URL.revokeObjectURL(url);changed();track('foto')};
+  img.onerror=()=>toast('Não consegui abrir essa foto 😕 tente outra (JPG ou PNG)');img.src=url;
+}
+function tirarFoto(){D.foto='';changed()}
+function novoQuadro(){SLUG=uid();const keep={y:D.y,m:D.m,d:D.d};D=Object.assign(blank(),UNLOCKED?{}:keep);UNLOCKED=false;save();history.replaceState(null,'',location.pathname+'#p='+SLUG);location.reload()}
+function copiarLink(){const u=linkQuadro();try{navigator.clipboard.writeText(u);toast('Link copiado! Cole no Chrome ou Safari 🔗')}catch(_){prompt('Copie o link:',u)}}
+function linkQuadro(){const c=Object.assign({},D,{foto:''});const d=btoa(unescape(encodeURIComponent(JSON.stringify(c)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');return location.origin+location.pathname+'#p='+SLUG+'&d='+d}
+function salvarLink(){const u=linkQuadro();try{navigator.clipboard.writeText(u);toast('Link copiado! Guarde pra imprimir de novo 🔗 (a foto não vai no link)')}catch(_){prompt('Guarde este link:',u)}}
+/* ---------- card grátis de compartilhamento ---------- */
+async function compartilharCard(){
+  if(!temData()){toast('Escolha a data do casamento primeiro 🙂');return}
+  const r=BD.calc(+D.y,+D.m,+D.d);const b=r.atual?r.atual.boda:r.prox.boda;
+  try{await Promise.all(['400 100px "Great Vibes"','600 60px "Cormorant Garamond"','italic 500 40px "Cormorant Garamond"','800 30px Nunito'].map(f=>document.fonts.load(f)))}catch(_){}
+  const c=document.createElement('canvas');c.width=1080;c.height=1350;const x=c.getContext('2d');
+  x.fillStyle='#fbf7ef';x.fillRect(0,0,1080,1350);
+  x.strokeStyle='#b8964a';x.lineWidth=4;x.strokeRect(44,44,992,1262);x.lineWidth=1.5;x.strokeRect(58,58,964,1234);
+  const img=new Image();img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(BD.icon(b.icon,b.cor));
+  await new Promise(ok=>{img.onload=ok;img.onerror=ok;setTimeout(ok,1500)});
+  try{x.drawImage(img,420,130,240,240)}catch(_){}
+  x.textAlign='center';x.fillStyle='#2d2620';
+  const casal=(D.n1.trim()&&D.n2.trim())?cap(D.n1)+' & '+cap(D.n2):'';
+  let y=450;
+  if(casal){x.font='400 '+(casal.length>22?76:96)+'px "Great Vibes"';x.fillText(casal,540,y);y+=90}
+  x.font='600 30px Nunito';x.fillStyle='#b8964a';
+  const k=r.futuro?'FALTAM '+BD.num(r.faltamCasar)+' DIAS PRO CASAMENTO':r.anos>=1?(r.ehHoje?'HOJE COMPLETAMOS':'COMPLETAMOS')+' '+r.anos+' '+(r.anos===1?'ANO':'ANOS'):'RECÉM-CASADOS';
+  x.fillText(k,540,y);y+=110;
+  x.fillStyle=b.cor;x.font='600 92px "Cormorant Garamond"';x.fillText((r.atual?'':'Próximas: ')+'Bodas de '+b.nome,540,y,960);y+=80;
+  x.fillStyle='#4a3e34';x.font='italic 500 38px "Cormorant Garamond"';
+  wrap(x,b.sig,540,y,860,48).forEach((l,i)=>x.fillText(l,540,y+i*48));y+=190;
+  x.fillStyle='#2d2620';x.font='600 64px "Cormorant Garamond"';
+  if(r.juntos>0){x.fillText(BD.num(r.juntos)+' dias juntos',540,y);y+=70}
+  if(r.prox&&r.anos>=1){x.font='500 34px "Cormorant Garamond"';x.fillStyle='#6b5b4d';x.fillText('próximas: Bodas de '+r.prox.boda.nome+' em '+BD.num(r.prox.faltam)+' dias',540,y)}
+  x.fillStyle='#8c3b4a';x.font='800 30px Nunito';x.fillText('Descubra as suas: giogas-pm.github.io/bodas',540,1245);
+  c.toBlob(async blob=>{
+    const file=new File([blob],'nossas-bodas.png',{type:'image/png'});const txt='Descubra as bodas de vocês: https://giogas-pm.github.io/bodas/?src=card';
+    track('card_share');
+    try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],text:txt});return}}catch(e){if(e&&e.name==='AbortError')return}
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nossas-bodas.png';document.body.appendChild(a);a.click();a.remove();toast('Card salvo! Agora é só mandar no WhatsApp 💛');
+  },'image/png');
+}
+function wrap(x,t,cx,y,maxW,lh){const w=t.split(' ');const L=[];let cur='';w.forEach(p=>{const tt=cur?cur+' '+p:p;if(x.measureText(tt).width>maxW&&cur){L.push(cur);cur=p}else cur=tt});if(cur)L.push(cur);return L.slice(0,3)}
+/* ---------- pagamento / impressão ---------- */
+function falta(){if(!temNomes())return 'Escreva os dois nomes do casal 🙂';if(!temData())return 'Escolha a data do casamento 🙂';return ''}
+async function comprar(){
+  const f=falta();if(f){fecharZoom();toast(f);$(temNomes()?'q_d':'q_n1').focus();$('quadro').scrollIntoView({behavior:'smooth'});return}
+  save();track('paywall_view',{a:anoQuadro(),e:D.estilo});
+  try{
+    const r=await fetch(SB_URL+'/functions/v1/mp-preferencia-bodas',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({slug:SLUG})});
+    const j=await r.json().catch(()=>({}));
+    if(j&&j.ok&&j.init_point){track('checkout_open');location.href=j.init_point;return}
+    toast('Pagamento indisponível agora 😬 tente em instantes');
+  }catch(e){toast('Pagamento indisponível agora 😬')}
+}
+async function status(){try{const r=await fetch(SB_URL+'/rest/v1/rpc/bodas_status',{method:'POST',headers:SB_H,body:JSON.stringify({p_slug:SLUG})});return (await r.json())===true}catch(_){return false}}
+async function handleReturn(){
+  const st=new URLSearchParams(location.search).get('pago');if(!st)return;
+  const limpa=()=>{try{history.replaceState(null,'',location.pathname+'#p='+SLUG)}catch(_){}};
+  if(st==='falhou'){toast('O pagamento não foi concluído. Pode tentar de novo 💛');limpa();return}
+  toast(st==='pendente'?'Pix em processamento — libera sozinho em instantes 💛':'Confirmando o pagamento... 💍');
+  for(let i=0;i<(st==='pendente'?48:14);i++){
+    if(await status()){UNLOCKED=true;try{localStorage.setItem('bodas_ok_'+SLUG,'1')}catch(_){}limpa();render();$('quadro').scrollIntoView();toast('Liberado! 🎉 Toque em "Imprimir / salvar PDF"');return}
+    await new Promise(r=>setTimeout(r,2500));
+  }
+  toast('Ainda processando — atualize a página em 1 minuto 💛');
+}
+async function imprimir(){
+  if(!UNLOCKED){comprar();return}
+  const f=falta();if(f){toast(f);return}
+  const mine=chaveCasal();
+  if(travaDiferente()){toast('Este pedido já foi usado pro quadro de outro casal. Pra este casal, crie um quadro novo no rodapé 💛');return}
+  try{
+    const r=await fetch(SB_URL+'/rest/v1/rpc/bodas_travar',{method:'POST',headers:SB_H,body:JSON.stringify({p_slug:SLUG,p_trava:await sha(SLUG+'|'+mine)})});
+    const srv=await r.json();
+    if(typeof srv==='string'&&srv&&srv!==await sha(SLUG+'|'+mine)){toast('Este pedido já foi usado pro quadro de outro casal. Pra este casal, crie um quadro novo 💛');return}
+  }catch(_){}
+  try{localStorage.setItem('bodas_tv_'+SLUG,mine)}catch(_){}
+  track('quadro_print',{a:anoQuadro(),e:D.estilo,t:D.tam});
+  const pa=$('printArea');const o=viewObj();o.unlocked=true;pa.innerHTML=BD.quadroHTML(o);pa.classList.toggle('a3',D.tam==='A3');
+  let ps=$('pgsize');if(!ps){ps=document.createElement('style');ps.id='pgsize';document.head.appendChild(ps)}ps.textContent='@media print{@page{size:'+D.tam+';margin:0}}';
+  toast('Na janela que abrir, escolha "Salvar como PDF" ou a impressora · papel '+D.tam+' · margens: nenhuma 🖨️');
+  (document.fonts?document.fonts.ready:Promise.resolve()).then(()=>setTimeout(()=>window.print(),450));
+}
+/* ---------- boot ---------- */
+load();
+const Q=new URLSearchParams(location.search),SRC=Q.get('src'),BSLUG=Q.get('b');
+if(BSLUG&&!D.anoManual){const b=BD.porSlug(BSLUG);if(b){D.ano=b.ano;D.anoManual=true;$('hintSeo').textContent='✔ Quadro já está com as Bodas de '+b.nome+' ('+b.ano+' '+(b.ano===1?'ano':'anos')+'). Preencha os nomes e a data.';$('hintSeo').style.display='block'}}
+bind();render();calcular(false);
+if(/Instagram|FBAN|FBAV|Pinterest|Line\/|TikTok|musical_ly/i.test(navigator.userAgent))$('inapp').style.display='block';
+document.fonts&&document.fonts.ready.then(fit);
+const io=new IntersectionObserver(es=>es.forEach(e=>$('bar').classList.toggle('show',e.isIntersecting)),{threshold:0.05});io.observe($('appRoot'));
+if(BSLUG)setTimeout(()=>$('quadro').scrollIntoView(),50);
+(async()=>{
+  try{track(SRC==='seo'?'seo_land':'visit',{src:SRC||null,b:BSLUG||null})}catch(_){}
+  if(!UNLOCKED&&!Q.get('pago')&&await status()){UNLOCKED=true;try{localStorage.setItem('bodas_ok_'+SLUG,'1')}catch(_){}render()}
+  handleReturn();
+})();
+</script>
+</body>
+</html>

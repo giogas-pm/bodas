@@ -1,0 +1,77 @@
+/* Quadro de Bodas — página A4 em 794x1123 px (96 dpi). 4 estilos. */
+.qd{width:794px;height:1123px;position:relative;overflow:hidden;--gold:#b8964a;--ink:#2d2620;color:var(--ink);background:#fbf7ef;box-shadow:0 10px 30px rgba(40,30,20,.18);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.qd *{box-sizing:border-box}
+.qd-frame{position:absolute;inset:34px;border:2px solid var(--gold);pointer-events:none}
+.qd-frame:after{content:"";position:absolute;inset:8px;border:1px solid var(--gold);opacity:.55}
+.qd-in{position:absolute;inset:78px 80px 70px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}
+.qd-top{font:600 22px 'Cormorant Garamond',Georgia,serif;letter-spacing:10px;text-transform:uppercase;color:var(--gold);padding-left:10px}
+.qd-nome{font-family:'Great Vibes',cursive;line-height:1.05;color:var(--ac);margin-top:-6px;white-space:nowrap}
+.qd-orn{width:240px;height:20px;color:var(--gold);margin-top:-4px}
+.qd-media{position:relative;width:300px;height:300px;display:flex;align-items:center;justify-content:center}
+.qd-icon{width:210px;height:210px;border-radius:50%;background:rgba(255,255,255,.7);box-shadow:inset 0 0 0 1px rgba(184,150,74,.5),0 0 0 10px rgba(184,150,74,.08);display:flex;align-items:center;justify-content:center}
+.qd-icon svg{width:150px;height:150px}
+.qd-foto{width:250px;height:250px;border-radius:50%;background-size:cover;background-position:center;box-shadow:0 0 0 6px #fff,0 0 0 8px var(--gold)}
+.qd-badge{position:absolute;right:14px;bottom:14px;width:84px;height:84px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px var(--gold);display:flex;align-items:center;justify-content:center}
+.qd-badge svg{width:62px;height:62px}
+.qd-wreath{position:absolute;inset:0;width:300px;height:300px}
+.qd-anos{font:500 30px 'Cormorant Garamond',Georgia,serif;letter-spacing:1px}
+.qd-anos b{font-weight:600;font-size:40px;color:var(--ac)}
+.qd-casal{font-family:'Great Vibes',cursive;line-height:1.1;white-space:nowrap;margin-top:-10px}
+.qd-casal span{color:var(--gold)}
+.qd-datas{font:italic 500 21px 'Cormorant Garamond',Georgia,serif;color:#5a4c40}
+.qd-datas i{color:var(--gold);font-style:normal;padding:0 6px}
+.qd-stats{display:flex;gap:0;border-top:1px solid rgba(184,150,74,.6);border-bottom:1px solid rgba(184,150,74,.6);padding:12px 0}
+.qd-stats div{padding:0 22px;font:500 15px 'Cormorant Garamond',Georgia,serif;letter-spacing:2px;text-transform:uppercase;color:#6b5b4d}
+.qd-stats div+div{border-left:1px solid rgba(184,150,74,.45)}
+.qd-stats b{display:block;font:600 30px 'Cormorant Garamond',Georgia,serif;letter-spacing:0;color:var(--ink);text-transform:none}
+.qd-sig,.qd-frase{font:italic 500 21px/1.45 'Cormorant Garamond',Georgia,serif;max-width:560px;color:#4a3e34}
+.qd-frase{font-size:23px}
+/* --- Moderno --- */
+.s-minimal{background:#fff;--gold:#1d1d1d}
+.s-minimal .qd-frame{inset:40px;border:1px solid #1d1d1d}
+.s-minimal .qd-frame:after{display:none}
+.s-minimal .qd-top{font:500 18px Jost,'Helvetica Neue',Arial,sans-serif;letter-spacing:14px;color:#1d1d1d}
+.s-minimal .qd-nome{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:500;color:#1d1d1d}
+.s-minimal .qd-big{font:200 200px/0.9 Jost,'Helvetica Neue',Arial,sans-serif;color:var(--ac);letter-spacing:-6px;display:flex;align-items:flex-end;gap:12px}
+.s-minimal .qd-big small{font:400 22px Jost,Arial,sans-serif;letter-spacing:6px;text-transform:uppercase;color:#1d1d1d;padding-bottom:22px}
+.s-minimal .qd-media{width:190px;height:190px}
+.s-minimal .qd-icon{width:170px;height:170px;background:none;box-shadow:none}
+.s-minimal .qd-icon svg{width:130px;height:130px}
+.s-minimal .qd-foto{width:180px;height:180px;box-shadow:none;border-radius:4px}
+.s-minimal .qd-badge{display:none}
+.s-minimal .qd-casal{font:500 34px Jost,Arial,sans-serif;letter-spacing:8px;text-transform:uppercase;margin:0}
+.s-minimal .qd-casal span{color:var(--ac);font-family:'Cormorant Garamond',serif;font-style:italic;letter-spacing:0;text-transform:none}
+.s-minimal .qd-datas{font:400 16px Jost,Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;font-style:normal;color:#444}
+.s-minimal .qd-stats{border-color:#1d1d1d}
+.s-minimal .qd-stats div{font:400 12px Jost,Arial,sans-serif;letter-spacing:3px;color:#555}
+.s-minimal .qd-stats div+div{border-color:#ddd}
+.s-minimal .qd-stats b{font:300 30px Jost,Arial,sans-serif;color:#1d1d1d}
+.s-minimal .qd-sig,.s-minimal .qd-frase{color:#333}
+/* --- Floral --- */
+.s-floral{background:#fcf2ee;background-image:radial-gradient(ellipse at 50% 40%,rgba(255,255,255,.85),transparent 70%);--gold:#b98a6e}
+.s-floral .qd-frame{inset:30px;border:1px solid var(--gold);border-radius:18px}
+.s-floral .qd-frame:after{border-radius:12px}
+.s-floral .qd-icon{width:190px;height:190px;background:rgba(255,255,255,.85);box-shadow:none}
+.s-floral .qd-icon svg{width:130px;height:130px}
+.s-floral .qd-foto{width:220px;height:220px;box-shadow:0 0 0 5px #fff}
+.qd-sprig{position:absolute;width:190px;height:190px;opacity:.9}
+.qd-sprig svg{width:100%;height:100%}
+.qd-sprig.tl{left:20px;top:20px;transform:rotate(-90deg) scaleX(-1)}
+.qd-sprig.br{right:20px;bottom:20px;transform:rotate(90deg) scaleX(-1)}
+/* --- Noite de gala --- */
+.s-noite{background:#14213a;background-image:radial-gradient(ellipse at 50% 35%,#1f3257,#101a2e 75%);--gold:#d9b86c;--ink:#f5ecd7;color:#f5ecd7}
+.s-noite .qd-nome{color:#e9cf8f}
+.s-noite .qd-icon{background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(217,184,108,.6),0 0 0 10px rgba(217,184,108,.07)}
+.s-noite .qd-foto{box-shadow:0 0 0 6px #14213a,0 0 0 8px var(--gold)}
+.s-noite .qd-badge{background:#14213a}
+.s-noite .qd-anos b{color:#e9cf8f}
+.s-noite .qd-datas,.s-noite .qd-sig,.s-noite .qd-frase{color:#d8ccb4}
+.s-noite .qd-stats div{color:#bfb39b}
+.s-noite .qd-stats b{color:#f5ecd7}
+.qd-deco{position:absolute;width:70px;height:70px;border:2px solid var(--gold)}
+.qd-deco.tl{left:22px;top:22px;border-right:0;border-bottom:0}.qd-deco.tr{right:22px;top:22px;border-left:0;border-bottom:0}
+.qd-deco.bl{left:22px;bottom:22px;border-right:0;border-top:0}.qd-deco.br{right:22px;bottom:22px;border-left:0;border-top:0}
+/* --- marca d'água da prévia --- */
+.qd .wm{position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='380' height='250'%3E%3Ctext x='10' y='150' transform='rotate(-28 190 125)' font-family='sans-serif' font-size='36' font-weight='800' fill='rgba(120,90,60,0.26)'%3EPRÉVIA • PRÉVIA%3C/text%3E%3C/svg%3E")}
+.s-noite .wm{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='380' height='250'%3E%3Ctext x='10' y='150' transform='rotate(-28 190 125)' font-family='sans-serif' font-size='36' font-weight='800' fill='rgba(255,255,255,0.2)'%3EPRÉVIA • PRÉVIA%3C/text%3E%3C/svg%3E")}
+.qd.unlocked .wm{display:none}
