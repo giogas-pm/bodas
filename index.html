@@ -163,7 +163,7 @@
     <div class="buy">
       <div class="unpaid">
         <button class="btn btn-pri w100" onclick="comprar()">🖼️ Liberar o quadro — R$24,90</button>
-        <p class="price">PDF em alta, sem a marca "PRÉVIA", nos 4 estilos, A4 e A3 · cartão, boleto ou saldo Mercado Pago · pagamento único · no extrato aparece BODAS<br>Produto digital: você imprime em casa ou na gráfica. Nada vai pelo correio.</p>
+        <p class="price">PDF em alta, sem a marca "PRÉVIA", nos 4 estilos, A4 e A3 · Pix, cartão ou boleto via Mercado Pago · pagamento único · no extrato aparece BODAS<br>Produto digital: você imprime em casa ou na gráfica. Nada vai pelo correio.</p>
       </div>
       <div class="paid">
         <button class="btn btn-pri w100" onclick="imprimir()">🖨️ Imprimir / salvar PDF</button>
@@ -377,7 +377,7 @@ async function handleReturn(){
   const st=new URLSearchParams(location.search).get('pago');if(!st)return;
   const limpa=()=>{try{history.replaceState(null,'',location.pathname+'#p='+SLUG)}catch(_){}};
   if(st==='falhou'){toast('O pagamento não foi concluído. Pode tentar de novo 💛');limpa();return}
-  toast(st==='pendente'?'Pagamento em processamento: libera sozinho quando o Mercado Pago confirmar (boleto leva até 2 dias úteis). Volte por este mesmo navegador 💛':'Confirmando o pagamento... 💍');
+  toast(st==='pendente'?'Pagamento em processamento: libera sozinho quando o Mercado Pago confirmar (Pix em instantes; boleto leva até 2 dias úteis). Volte por este mesmo navegador 💛':'Confirmando o pagamento... 💍');
   for(let i=0;i<(st==='pendente'?48:14);i++){
     if(await status()){UNLOCKED=true;try{localStorage.setItem('bodas_ok_'+SLUG,'1')}catch(_){}limpa();render();$('quadro').scrollIntoView();toast('Liberado! 🎉 Toque em "Imprimir / salvar PDF"');return}
     await new Promise(r=>setTimeout(r,2500));
