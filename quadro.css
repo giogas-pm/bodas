@@ -54,10 +54,10 @@
 .s-floral .qd-icon{width:190px;height:190px;background:rgba(255,255,255,.85);box-shadow:none}
 .s-floral .qd-icon svg{width:130px;height:130px}
 .s-floral .qd-foto{width:220px;height:220px;box-shadow:0 0 0 5px #fff}
-.qd-sprig{position:absolute;width:190px;height:190px;opacity:.9}
+.qd-sprig{position:absolute;width:150px;height:150px;opacity:.9}
 .qd-sprig svg{width:100%;height:100%}
-.qd-sprig.tl{left:20px;top:20px;transform:rotate(-90deg) scaleX(-1)}
-.qd-sprig.br{right:20px;bottom:20px;transform:rotate(90deg) scaleX(-1)}
+.qd-sprig.tl{left:14px;top:14px;transform:rotate(-90deg) scaleX(-1)}
+.qd-sprig.br{right:14px;bottom:14px;transform:rotate(90deg) scaleX(-1)}
 /* --- Noite de gala --- */
 .s-noite{background:#14213a;background-image:radial-gradient(ellipse at 50% 35%,#1f3257,#101a2e 75%);--gold:#d9b86c;--ink:#f5ecd7;color:#f5ecd7}
 .s-noite .qd-nome{color:#e9cf8f}

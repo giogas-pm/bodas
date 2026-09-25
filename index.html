@@ -108,7 +108,8 @@
     body>*:not(#printArea){display:none!important}
     #printArea{display:block!important}
     #printArea .qd{box-shadow:none;margin:0;page-break-after:avoid}
-    #printArea.a3 .qd{zoom:1.41421}
+    #printArea.a3 .qd{zoom:1.412}
+    #printArea{height:100vh;overflow:hidden}
   }
   #pvw{user-select:none;-webkit-user-select:none}
 </style>
@@ -162,7 +163,7 @@
     <div class="buy">
       <div class="unpaid">
         <button class="btn btn-pri w100" onclick="comprar()">🖼️ Liberar o quadro — R$24,90</button>
-        <p class="price">PDF em alta, sem a marca "PRÉVIA", nos 4 estilos, A4 e A3 · Pix ou cartão via Mercado Pago · pagamento único · no extrato aparece BODAS<br>Produto digital: você imprime em casa ou na gráfica. Nada vai pelo correio.</p>
+        <p class="price">PDF em alta, sem a marca "PRÉVIA", nos 4 estilos, A4 e A3 · cartão, boleto ou saldo Mercado Pago · pagamento único · no extrato aparece BODAS<br>Produto digital: você imprime em casa ou na gráfica. Nada vai pelo correio.</p>
       </div>
       <div class="paid">
         <button class="btn btn-pri w100" onclick="imprimir()">🖨️ Imprimir / salvar PDF</button>
@@ -200,7 +201,7 @@
 <div id="printArea"></div>
 <div class="bar" id="bar"><button class="btn btn-pri w100" id="barBtn" onclick="barAcao()">🖼️ Ver o quadro</button></div>
 <div class="zoom" id="zoom" onclick="if(event.target===this)fecharZoom()"><button class="x" onclick="fecharZoom()" aria-label="Fechar">×</button><div class="zin" id="zin"><div id="zfit" style="transform-origin:top left"></div></div>
-  <div class="zbuy"><div class="unpaid" id="zUnpaid"><button class="btn btn-pri w100" onclick="comprar()">🖼️ Liberar o quadro — R$24,90</button><p class="price" style="color:#e8dccb">Sai sem a marca "PRÉVIA", em PDF A4 e A3. Pix ou cartão.</p></div></div></div>
+  <div class="zbuy"><div class="unpaid" id="zUnpaid"><button class="btn btn-pri w100" onclick="comprar()">🖼️ Liberar o quadro — R$24,90</button><p class="price" style="color:#e8dccb">Sai sem a marca "PRÉVIA", em PDF A4 e A3. Cartão, boleto ou saldo Mercado Pago.</p></div></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="data.js"></script>
@@ -376,7 +377,7 @@ async function handleReturn(){
   const st=new URLSearchParams(location.search).get('pago');if(!st)return;
   const limpa=()=>{try{history.replaceState(null,'',location.pathname+'#p='+SLUG)}catch(_){}};
   if(st==='falhou'){toast('O pagamento não foi concluído. Pode tentar de novo 💛');limpa();return}
-  toast(st==='pendente'?'Pix em processamento — libera sozinho em instantes 💛':'Confirmando o pagamento... 💍');
+  toast(st==='pendente'?'Pagamento em processamento: libera sozinho quando o Mercado Pago confirmar (boleto leva até 2 dias úteis). Volte por este mesmo navegador 💛':'Confirmando o pagamento... 💍');
   for(let i=0;i<(st==='pendente'?48:14);i++){
     if(await status()){UNLOCKED=true;try{localStorage.setItem('bodas_ok_'+SLUG,'1')}catch(_){}limpa();render();$('quadro').scrollIntoView();toast('Liberado! 🎉 Toque em "Imprimir / salvar PDF"');return}
     await new Promise(r=>setTimeout(r,2500));
@@ -408,7 +409,7 @@ bind();render();calcular(false);
 if(/Instagram|FBAN|FBAV|Pinterest|Line\/|TikTok|musical_ly/i.test(navigator.userAgent))$('inapp').style.display='block';
 document.fonts&&document.fonts.ready.then(fit);
 const io=new IntersectionObserver(es=>es.forEach(e=>$('bar').classList.toggle('show',e.isIntersecting)),{threshold:0.05});io.observe($('appRoot'));
-if(BSLUG)setTimeout(()=>$('quadro').scrollIntoView(),50);
+if(BSLUG){const go=()=>{if(scrollY<50)$('quadro').scrollIntoView()};setTimeout(go,300);document.fonts&&document.fonts.ready.then(()=>setTimeout(go,100))}
 (async()=>{
   try{track(SRC==='seo'?'seo_land':'visit',{src:SRC||null,b:BSLUG||null})}catch(_){}
   if(!UNLOCKED&&!Q.get('pago')&&await status()){UNLOCKED=true;try{localStorage.setItem('bodas_ok_'+SLUG,'1')}catch(_){}render()}
