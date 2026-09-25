@@ -409,7 +409,7 @@ bind();render();calcular(false);
 if(/Instagram|FBAN|FBAV|Pinterest|Line\/|TikTok|musical_ly/i.test(navigator.userAgent))$('inapp').style.display='block';
 document.fonts&&document.fonts.ready.then(fit);
 const io=new IntersectionObserver(es=>es.forEach(e=>$('bar').classList.toggle('show',e.isIntersecting)),{threshold:0.05});io.observe($('appRoot'));
-if(BSLUG){const go=()=>{if(scrollY<50)$('quadro').scrollIntoView()};setTimeout(go,300);document.fonts&&document.fonts.ready.then(()=>setTimeout(go,100))}
+if(BSLUG){const go=()=>{if(scrollY<50)window.scrollTo(0,$('quadro').getBoundingClientRect().top+scrollY-8)};setTimeout(go,300);document.fonts&&document.fonts.ready.then(()=>setTimeout(go,100))}
 (async()=>{
   try{track(SRC==='seo'?'seo_land':'visit',{src:SRC||null,b:BSLUG||null})}catch(_){}
   if(!UNLOCKED&&!Q.get('pago')&&await status()){UNLOCKED=true;try{localStorage.setItem('bodas_ok_'+SLUG,'1')}catch(_){}render()}
